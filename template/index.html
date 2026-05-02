@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도하 스튜디오 | 템플릿 둘러보기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFB6C1; 
+            --secondary-color: #FFF0F5; 
+            --text-color: #5A4B4D; 
+            --box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+        }
+        body { font-family: 'Jua', sans-serif; background-color: var(--secondary-color); color: var(--text-color); margin: 0; padding: 0; text-align: center; }
+
+        /* 네비게이션 */
+        header { background-color: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .logo { font-size: 24px; color: var(--primary-color); margin-left: 10px; font-weight: bold; text-decoration: none; }
+        .back-btn { background-color: var(--primary-color); color: white !important; padding: 8px 15px; border-radius: 15px; border: none; font-family: 'Jua', sans-serif; cursor: pointer; text-decoration: none; font-size: 16px; transition: 0.2s; }
+        .back-btn:hover { transform: scale(1.05); }
+
+        /* 헤더 섹션 */
+        .page-header { padding: 60px 20px 20px 20px; }
+        h1 { font-size: 42px; color: var(--text-color); margin-bottom: 10px; }
+        p.desc { font-size: 20px; color: #8B7377; margin-bottom: 40px; }
+
+        /* 템플릿 버튼 그리드 */
+        .template-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 템플릿 선택 버튼 스타일 */
+        .tpl-btn {
+            background-color: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 25px;
+            padding: 40px 20px;
+            width: 250px;
+            font-size: 24px;
+            font-family: 'Jua', sans-serif;
+            color: var(--text-color);
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tpl-btn:hover {
+            transform: translateY(-10px);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .tpl-icon {
+            font-size: 50px;
+        }
+
+        .tpl-subtitle {
+            font-size: 16px;
+            color: #8B7377;
+        }
+        
+        .tpl-btn:hover .tpl-subtitle {
+            color: white;
+        }
+
+        /* 준비중인 버튼 */
+        .tpl-btn.disabled {
+            border-color: #ddd;
+            background-color: #f9f9f9;
+            color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .tpl-btn.disabled:hover {
+            transform: none;
+            background-color: #f9f9f9;
+            color: #aaa;
+        }
+
+        footer { background-color: white; padding: 30px; color: #8B7377; margin-top: 80px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">🐥 도하 스튜디오</a>
+        <a href="/" class="back-btn">🏠 메인으로 돌아가기</a>
+    </header>
+
+    <div class="page-header">
+        <h1>원하시는 템플릿을 선택해주세요!</h1>
+        <p class="desc">다양한 테마의 디자인이 준비되어 있습니다. 클릭하여 상세페이지를 확인해보세요.</p>
+    </div>
+
+    <!-- 템플릿 버튼들 -->
+    <div class="template-grid">
+        <button class="tpl-btn" onclick="alert('🍰 카페/디저트 템플릿 상세페이지로 이동합니다. (준비 중)')">
+            <span class="tpl-icon">🍰</span>
+            카페 / 디저트
+            <span class="tpl-subtitle">따뜻하고 달콤한 감성</span>
+        </button>
+
+        <button class="tpl-btn" onclick="alert('🎨 개인 포트폴리오 템플릿 상세페이지로 이동합니다. (준비 중)')">
+            <span class="tpl-icon">🎨</span>
+            개인 포트폴리오
+            <span class="tpl-subtitle">나의 작업물을 돋보이게</span>
+        </button>
+
+        <button class="tpl-btn" onclick="alert('🛍️ 미니 쇼핑몰 템플릿 상세페이지로 이동합니다. (준비 중)')">
+            <span class="tpl-icon">🛍️</span>
+            미니 쇼핑몰
+            <span class="tpl-subtitle">깔끔한 상품 진열</span>
+        </button>
+
+        <button class="tpl-btn" onclick="alert('🏢 비즈니스/기업 템플릿 상세페이지로 이동합니다. (준비 중)')">
+            <span class="tpl-icon">🏢</span>
+            비즈니스 / 기업
+            <span class="tpl-subtitle">신뢰감을 주는 심플함</span>
+        </button>
+
+        <button class="tpl-btn" onclick="alert('📝 커뮤니티/블로그 템플릿 상세페이지로 이동합니다. (준비 중)')">
+            <span class="tpl-icon">📝</span>
+            블로그 / 커뮤니티
+            <span class="tpl-subtitle">소통하기 좋은 레이아웃</span>
+        </button>
+
+        <!-- 비활성화된 추가 템플릿 예시 -->
+        <button class="tpl-btn disabled">
+            <span class="tpl-icon">✨</span>
+            신규 템플릿
+            <span class="tpl-subtitle">열심히 제작 중입니다!</span>
+        </button>
+    </div>
+
+    <footer>
+        ⓒ 2026 도하 스튜디오. All rights reserved.<br>당신의 상상을 현실로 만들어드립니다.
+    </footer>
+
+</body>
+</html>
