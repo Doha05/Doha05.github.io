@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="site-title">도하 스튜디오 | 웹사이트 만들기</title>
     
+    <!-- 🌟 브라우저 탭 아이콘(파비콘)을 오리(병아리) 이모지로 변경하는 마법의 코드 🌟 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐥</text></svg>">
+    
     <meta property="og:title" content="도하 스튜디오 | 웹사이트 만들기">
     <meta property="og:description" content="나만의 특별한 홈페이지를 합리적인 가격에 만들어보세요!">
-    <!-- ▼ 깃허브에 사진을 올리고 아래 주소를 네 깃허브 주소로 바꿔주세요! ▼ -->
     <meta property="og:image" content="https://Doha05.github.io/thumbnail.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -373,11 +375,9 @@
         function sendAdminMessage() { if(!currentChatUser) return; const input = document.getElementById('adminChatInput'); const text = input.value.trim(); if(!text) return; let chats = JSON.parse(localStorage.getItem('db_chats')); chats[currentChatUser].push({sender: 'doha', text: text, isRead: false}); localStorage.setItem('db_chats', JSON.stringify(chats)); input.value = ''; renderAdminChat(); updateBadges(); }
     </script>
     
-    <!-- 🚨 우클릭 및 개발자 도구 방지 코드 추가 -->
+    <!-- 🚨 우클릭 및 개발자 도구 방지 코드 -->
     <script>
-        // 우클릭 방지
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        // F12, Ctrl+Shift+I 등 개발자 도구 단축키 방지
         document.addEventListener('keydown', function(e) {
             if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73) || (e.ctrlKey && e.shiftKey && e.keyCode === 67) || (e.ctrlKey && e.keyCode === 85)) {
                 e.preventDefault();
