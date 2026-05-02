@@ -11,13 +11,15 @@
         
         header { background-color: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); display: flex; justify-content: space-between; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
         .logo { font-size: 24px; color: var(--primary-color); font-weight: bold; text-decoration: none; }
-        .back-btn { background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 16px; }
+        .back-btn { background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 16px; transition: 0.2s; }
+        .back-btn:hover { transform: scale(1.05); }
 
-        .guide-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 30px; text-align: left; box-shadow: 0 8px 20px rgba(0,0,0,0.1); line-height: 1.8; }
-        h1 { color: var(--primary-color); border-bottom: 3px dashed #FFE4E1; padding-bottom: 15px; margin-top: 0; }
-        h2 { color: #8B7377; margin-top: 30px; }
-        .step-box { background: #FFF9FA; border-left: 5px solid var(--primary-color); padding: 15px; margin-bottom: 20px; border-radius: 10px; }
-        .code-block { background: #333; color: #A8E6CF; padding: 10px; border-radius: 5px; font-family: monospace; display: inline-block; }
+        .guide-container { max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 30px; text-align: left; box-shadow: 0 8px 20px rgba(0,0,0,0.1); line-height: 1.8; }
+        h1 { color: var(--primary-color); border-bottom: 3px dashed #FFE4E1; padding-bottom: 15px; margin-top: 0; font-size: 32px; }
+        h2 { color: #8B7377; margin-top: 35px; font-size: 22px; }
+        .step-box { background: #FFF9FA; border-left: 5px solid var(--primary-color); padding: 20px; margin-bottom: 20px; border-radius: 10px; font-size: 16px; }
+        .code-block { background: #5A4B4D; color: #A8E6CF; padding: 4px 10px; border-radius: 5px; font-family: monospace; font-weight: bold; }
+        .highlight { color: #ff4d4d; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -27,37 +29,44 @@
     </header>
 
     <div class="guide-container">
-        <h1>🌐 내 도메인(.kro.kr)과 깃허브 연결하기</h1>
-        <p>도하 스튜디오에서 제작한 홈페이지를 고객님만의 주소로 연결하고 안전한 HTTPS를 적용하는 방법입니다.</p>
+        <h1>🌐 깃허브 + 개인 도메인(.kro.kr) 완벽 연결 가이드</h1>
+        <p style="font-size: 18px; color: #8B7377;">도하 스튜디오에서 제작한 홈페이지를 고객님만의 주소로 연결하고 안전한 HTTPS(자물쇠 마크)를 적용하는 방법입니다. 천천히 따라 해보세요!</p>
 
-        <h2>1단계: 내 도메인 한국에서 무료 도메인 발급받기</h2>
+        <h2>1단계: 깃허브(GitHub)에 호스팅용 저장소 만들기</h2>
+        <div class="step-box">
+            1. GitHub에 로그인한 뒤, 우측 상단의 <b>[New]</b> 버튼을 눌러 새로운 저장소(Repository)를 만듭니다.<br>
+            2. Repository name(저장소 이름) 칸에 반드시 <span class="code-block">본인깃허브아이디.github.io</span> 라고 정확히 적어주세요. (예시: 내 아이디가 doha라면 <b>doha.github.io</b>)<br>
+            3. 아래 설정에서 <span class="highlight">[Public] (전체 공개)</span>이 체크되어 있는지 꼭 확인하세요! Private(비공개)으로 설정하면 웹사이트가 열리지 않습니다.<br>
+            4. <b>[Create repository]</b> 버튼을 눌러 생성한 뒤, 도하 스튜디오에서 받은 HTML 파일들을 업로드합니다.
+        </div>
+
+        <h2>2단계: '내 도메인 한국'에서 무료 도메인 발급받기</h2>
         <div class="step-box">
             1. '내 도메인 한국' 사이트에 접속해 로그인합니다.<br>
-            2. 원하시는 주소(예: `doha-studio.kro.kr`)를 검색하여 등록합니다.<br>
-            3. 도메인 관리 탭에서 <b>[고급 설정(DNS)]</b>으로 들어갑니다.
+            2. 원하시는 주소(예: <span class="code-block">doha-studio.kro.kr</span>)를 검색하여 내 소유로 등록합니다.<br>
+            3. 등록을 마친 후, 도메인 관리 탭에서 <b>[고급 설정(DNS)]</b> 버튼을 클릭해 설정 창을 엽니다.
         </div>
 
-        <h2>2단계: 깃허브 서버 IP 주소 입력하기 (A 레코드)</h2>
+        <h2>3단계: 별칭(CNAME)으로 깃허브 주소 연결하기</h2>
         <div class="step-box">
-            '내 도메인 한국'의 고급 설정 창에서 <b>IP(A)</b> 항목에 아래 깃허브의 고정 IP 주소 4개를 모두 추가해 줍니다.<br><br>
-            <span class="code-block">185.199.108.153</span><br>
-            <span class="code-block">185.199.109.153</span><br>
-            <span class="code-block">185.199.110.153</span><br>
-            <span class="code-block">185.199.111.153</span>
+            IP 주소를 여러 개 입력할 필요 없이, 가장 쉽고 확실한 <b>CNAME</b> 방식을 사용합니다.<br><br>
+            1. '내 도메인 한국'의 고급 설정(DNS) 창에서 <b>[별칭(CNAME)]</b> 추가 항목을 찾습니다.<br>
+            2. 목적지(값) 입력 칸에 1단계에서 만든 본인의 깃허브 호스팅 주소인 <span class="code-block">본인아이디.github.io</span> 를 적어주고 <b>저장</b>을 누릅니다.
         </div>
 
-        <h2>3단계: 깃허브 페이지에 도메인 등록하기</h2>
+        <h2>4단계: 깃허브 페이지에 도메인 등록하기</h2>
         <div class="step-box">
-            1. 고객님의 GitHub 리포지토리로 이동합니다.<br>
-            2. 상단의 <b>[Settings]</b> -> 왼쪽의 <b>[Pages]</b> 탭을 클릭합니다.<br>
-            3. 화면을 살짝 내려서 <b>[Custom domain]</b> 칸에 방금 발급받은 도메인(`doha-studio.kro.kr`)을 입력하고 <b>[Save]</b>를 누릅니다.
+            1. 다시 깃허브의 <span class="code-block">본인아이디.github.io</span> 저장소 화면으로 돌아옵니다.<br>
+            2. 상단 메뉴의 <b>[Settings(설정)]</b> ➡️ 왼쪽 메뉴의 <b>[Pages]</b> 탭을 클릭합니다.<br>
+            3. 화면 중간쯤에 있는 <b>[Custom domain]</b> 칸에 방금 발급받은 도메인(예: <span class="code-block">doha-studio.kro.kr</span>)을 입력하고 <b>[Save]</b>를 누릅니다.
         </div>
 
-        <h2>4단계: 보안 연결(HTTPS) 적용하기</h2>
+        <h2>5단계: 보안 연결(HTTPS) 적용하기</h2>
         <div class="step-box">
-            1. 도메인을 저장하고 나서 약 10분~15분 정도 깃허브가 DNS를 확인하는 시간을 기다립니다.<br>
-            2. 페이지를 새로고침 한 뒤, Custom domain 바로 아래에 있는 <b>[Enforce HTTPS]</b> 체크박스를 체크합니다.<br>
-            3. 축하합니다! 이제 안전한 자물쇠 마크가 뜨는 나만의 홈페이지가 완성되었습니다 🎉
+            1. 4단계에서 도메인을 저장하고 나서, 깃허브가 전 세계 서버에 주소를 알리는 시간(약 10분~15분)을 기다려주세요.<br>
+            2. 시간이 지난 후 페이지를 새로고침 해봅니다.<br>
+            3. Custom domain 칸 바로 아래에 있는 <span class="highlight">[Enforce HTTPS]</span> 체크박스가 활성화되면 클릭해서 <b>체크</b>해 줍니다.<br>
+            4. 축하합니다! 🎉 이제 주소창에 안전한 자물쇠 마크가 뜨는 완벽한 나만의 홈페이지가 완성되었습니다.
         </div>
     </div>
 </body>
