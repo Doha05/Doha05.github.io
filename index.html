@@ -11,7 +11,6 @@
             --secondary-color: #FFF0F5; 
             --text-color: #5A4B4D; 
             --point-color: #FFD700; 
-            /* 메인 핑크보다 약간 더 진한 핑크로 변경 */
             --chat-color: #FF9AA2; 
             --box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
         }
@@ -205,7 +204,7 @@
         </div>
     </div>
 
-    <!-- 우측 하단 채팅 둥둥이 위젯 (알림 배지 추가) -->
+    <!-- 우측 하단 채팅 둥둥이 위젯 (관리자도 이제 보입니다!) -->
     <div class="chat-btn" id="userChatBtn" onclick="toggleUserChat()">
         💬
         <div class="chat-badge" id="chatBadge">0</div>
@@ -261,10 +260,6 @@
             renderNav();
             renderReviews();
             updateBadges(); // 초기 접속 시 알림 배지 확인
-            
-            if(currentUser === 'doha') {
-                document.getElementById('userChatBtn').style.display = 'none';
-            }
         };
 
         // --- 탭 간 실시간 동기화 (핵심 로직) ---
@@ -272,13 +267,13 @@
             if(e.key === 'db_chats') {
                 updateBadges(); // 알림 배지 숫자 업데이트
                 
-                // 만약 유저가 채팅창을 열어두고 있다면 바로 업데이트
+                // 만약 유저가 일반 채팅창을 열어두고 있다면 바로 업데이트
                 const userChatWindow = document.getElementById('userChatWindow');
                 if (userChatWindow.style.display === 'flex') {
                     renderUserChat();
                 }
                 
-                // 만약 관리자가 특정 유저의 DM창을 열어두고 있다면 바로 업데이트
+                // 만약 관리자가 DM창을 열어두고 있다면 바로 업데이트
                 const adminDmModal = document.getElementById('adminDmModal');
                 if (adminDmModal.style.display === 'flex') {
                     renderDmUserList(); // 사이드바 업데이트
@@ -308,13 +303,14 @@
                 }
             }
             
-            // 관리자 메뉴 상단 배지
+            // 관리자 배지
             if (currentUser === 'doha') {
                 let totalUnread = 0;
                 Object.keys(chats).forEach(userId => {
                     totalUnread += chats[userId].filter(m => m.sender !== 'doha' && !m.isRead).length;
                 });
                 
+                // 상단 메뉴 배지
                 const adminBadge = document.getElementById('adminNavBadge');
                 if (adminBadge) {
                     if (totalUnread > 0) {
@@ -324,10 +320,21 @@
                         adminBadge.style.display = 'none';
                     }
                 }
+
+                // 우측 하단 둥둥이 버튼 배지
+                const bottomBadge = document.getElementById('chatBadge');
+                if (bottomBadge) {
+                    if (totalUnread > 0) {
+                        bottomBadge.style.display = 'flex';
+                        bottomBadge.innerText = totalUnread;
+                    } else {
+                        bottomBadge.style.display = 'none';
+                    }
+                }
             }
         }
 
-        // --- 상단 메뉴 (관리자 배지 포함) ---
+        // --- 상단 메뉴 ---
         function renderNav() {
             const nav = document.getElementById('nav-menu');
             if(!currentUser) {
@@ -444,6 +451,7 @@
                 openModal('loginModal');
                 return;
             }
+            // 관리자가 하단 둥둥이 버튼을 누르면 DM 모달을 엽니다!
             if (currentUser === 'doha') {
                 openDmModal();
                 return;
@@ -490,6 +498,7 @@
 
             input.value = '';
             renderUserChat();
+            updateBadges(); // 전송 후 내 창의 배지는 변경 없지만 안전하게 업데이트
         }
 
         // --- 관리자 DM ---
@@ -556,6 +565,7 @@
 
             input.value = '';
             renderAdminChat();
+            updateBadges(); // 관리자가 답장 보낸 직후에도 혹시 모를 동기화 반영
         }
     </script>
 </body>
