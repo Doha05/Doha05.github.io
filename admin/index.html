@@ -36,9 +36,10 @@
 
     <div id="login-box">
         <h2 style="border:none; margin-top:0;">🔒 도하 스튜디오 전체 관리자</h2>
-        <input type="text" id="id-input" placeholder="관리자 아이디 (doha)">
+        <!-- 힌트 글씨(placeholder)를 노출되지 않도록 깔끔하게 수정했습니다 -->
+        <input type="text" id="id-input" placeholder="아이디를 입력하세요">
         <br>
-        <input type="password" id="pw-input" placeholder="비밀번호 (0706)">
+        <input type="password" id="pw-input" placeholder="비밀번호를 입력하세요">
         <br>
         <button onclick="checkLogin()">접속하기</button>
     </div>
@@ -154,14 +155,14 @@
         }
 
         function deleteMember(targetId) {
-            if(!confirm(`정말로 회원 [${targetId}]님을 탈퇴시키겠습니까?`)) return;
+            if(!confirm(`정말로 회원 [${targetId}]님을 강제 탈퇴시키겠습니까?`)) return;
 
             let users = JSON.parse(localStorage.getItem('db_users'));
             // 타겟 유저를 제외하고 배열 재구성
             users = users.filter(user => user.id !== targetId);
             localStorage.setItem('db_users', JSON.stringify(users));
 
-            // 해당 유저의 채팅 기록도 삭제 처리 (옵션)
+            // 해당 유저의 채팅 기록도 함께 삭제 처리
             let chats = JSON.parse(localStorage.getItem('db_chats'));
             if(chats[targetId]) {
                 delete chats[targetId];
