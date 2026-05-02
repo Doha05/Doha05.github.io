@@ -325,14 +325,13 @@
                 nav.innerHTML = `<a href="#templates">템플릿</a><a href="#pricing">가격표</a><a href="#reviews">고객리뷰</a><a onclick="openDmModal()" style="color:var(--chat-color); font-weight:bold; cursor:pointer; position:relative;">💌 DM관리<span id="adminNavBadge" style="display:none; position:absolute; top:-10px; right:-15px; background:red; color:white; border-radius:50%; width:18px; height:18px; font-size:11px; align-items:center; justify-content:center;">0</span></a><span style="color:var(--primary-color); font-weight:bold; margin-left:15px;">👑 도하님</span><button class="btn-primary" onclick="doLogout()">로그아웃</button>`;
             } else {
                 let nick = getNickname(currentUser);
-                nav.innerHTML = `<a href="#templates">템플릿</a><a href="#pricing">가격표</a><a href="#reviews">고객리뷰</a><a onclick="toggleUserChat()">채팅</a><span style="font-weight:bold; margin-left:10px;">${nick}님</span><button class="btn-primary" onclick="doLogout()">로그아웃</button><button class="btn-danger" onclick="doWithdraw()">회원탈퇴</button>`;
+                // 일반 회원의 네비게이션에서 '회원탈퇴' 버튼 제거
+                nav.innerHTML = `<a href="#templates">템플릿</a><a href="#pricing">가격표</a><a href="#reviews">고객리뷰</a><a onclick="toggleUserChat()">채팅</a><span style="font-weight:bold; margin-left:10px;">${nick}님</span><button class="btn-primary" onclick="doLogout()">로그아웃</button>`;
             }
         }
 
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        function doWithdraw() { if(!confirm("탈퇴하시겠습니까?")) return; let users = JSON.parse(localStorage.getItem('db_users')).filter(u => u.id !== currentUser); localStorage.setItem('db_users', JSON.stringify(users)); let chats = JSON.parse(localStorage.getItem('db_chats')); if(chats[currentUser]) { delete chats[currentUser]; localStorage.setItem('db_chats', JSON.stringify(chats)); } alert("탈퇴 완료되었습니다."); localStorage.removeItem('currentUser'); location.reload(); }
         
         function doSignup() { 
             const id = document.getElementById('reg-id').value.trim(); 
