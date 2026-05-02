@@ -372,5 +372,15 @@
         function renderAdminChat() { if(!currentChatUser) return; let chats = JSON.parse(localStorage.getItem('db_chats')); let history = chats[currentChatUser] || []; const body = document.getElementById('adminChatBody'); body.innerHTML = ''; history.forEach(msg => { let clz = msg.sender === 'doha' ? 'me' : 'admin'; body.innerHTML += `<div class="chat-msg ${clz}">${msg.text}</div>`; }); body.scrollTop = body.scrollHeight; }
         function sendAdminMessage() { if(!currentChatUser) return; const input = document.getElementById('adminChatInput'); const text = input.value.trim(); if(!text) return; let chats = JSON.parse(localStorage.getItem('db_chats')); chats[currentChatUser].push({sender: 'doha', text: text, isRead: false}); localStorage.setItem('db_chats', JSON.stringify(chats)); input.value = ''; renderAdminChat(); updateBadges(); }
     </script>
+    <script>
+    // 우클릭 방지
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    // F12, Ctrl+Shift+I 등 개발자 도구 단축키 방지
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+            e.preventDefault();
+        }
+    });
+    </script>
 </body>
 </html>
