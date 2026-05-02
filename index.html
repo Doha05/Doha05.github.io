@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="site-title">도하 스튜디오 | 귀여운 AI 웹사이트</title>
+    <!-- 탭 제목과 카톡 공유 제목/설명을 요청한 대로 수정했어! -->
+    <title id="site-title">도하 스튜디오 | 웹사이트 만들기</title>
     
-    <meta property="og:title" content="도하 스튜디오 | 귀여운 AI 웹사이트">
+    <meta property="og:title" content="도하 스튜디오 | 웹사이트 만들기">
     <meta property="og:description" content="나만의 특별한 홈페이지를 합리적인 가격에 만들어보세요!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800">
+    <!-- ▼ 깃허브에 사진을 올리고 아래 주소를 네 깃허브 주소로 바꿔줘! ▼ -->
+    <meta property="og:image" content="https://여기에-본인아이디-입력.github.io/thumbnail.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <style>
@@ -163,7 +165,6 @@
         <div class="modal-content"><span class="close-btn" onclick="closeModal('loginModal')">&times;</span><h2 style="color:var(--primary-color);">로그인</h2><input type="text" id="login-id" placeholder="아이디"><input type="password" id="login-pw" placeholder="비밀번호"><button class="submit-btn" onclick="doLogin()">로그인</button><div class="modal-links" onclick="openModal('signupModal'); closeModal('loginModal');">회원이 아니신가요? 회원가입 하기</div></div>
     </div>
     
-    <!-- 닉네임 입력 칸 추가 -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
@@ -201,7 +202,6 @@
     </div>
 
     <script>
-        // 초기화 시 닉네임 정보 포함
         if(!localStorage.getItem('db_users')) { localStorage.setItem('db_users', JSON.stringify([{id:'doha', pw:'0706', nickname:'도하', messenger:'', account:''}])); }
         if(!localStorage.getItem('db_reviews')) { localStorage.setItem('db_reviews', JSON.stringify([{author:'테스터', stars:'⭐⭐⭐⭐⭐', text:'테스트'}])); }
         if(!localStorage.getItem('db_chats')) { localStorage.setItem('db_chats', JSON.stringify({})); }
@@ -209,7 +209,6 @@
         let currentUser = localStorage.getItem('currentUser');
         let currentChatUser = null;
 
-        // 아이디로 닉네임 찾는 헬퍼 함수
         function getNickname(userId) {
             let users = JSON.parse(localStorage.getItem('db_users')) || [];
             let u = users.find(u => u.id === userId);
@@ -283,7 +282,6 @@
             }
         }
 
-        // 네비게이션: 아이디 대신 닉네임 노출
         function renderNav() {
             const nav = document.getElementById('nav-menu');
             if(!currentUser) {
@@ -322,12 +320,11 @@
         function doLogin() { const id = document.getElementById('login-id').value.trim(); const pw = document.getElementById('login-pw').value; let user = JSON.parse(localStorage.getItem('db_users')).find(u => u.id === id && u.pw === pw); if(user) { localStorage.setItem('currentUser', user.id); location.reload(); } else { alert("로그인 실패"); } }
         function doLogout() { localStorage.removeItem('currentUser'); location.reload(); }
         
-        // 리뷰: 작성자의 닉네임 노출
         function renderReviews() { 
             const container = document.getElementById('review-container'); 
             container.innerHTML = ''; 
             JSON.parse(localStorage.getItem('db_reviews')).forEach(r => { 
-                let authorNick = getNickname(r.author); // 닉네임 변환
+                let authorNick = getNickname(r.author);
                 container.innerHTML += `<div class="review-card"><div class="review-author">${authorNick}님</div><div class="review-stars">${r.stars}</div><p style="margin:0;">${r.text}</p></div>`; 
             }); 
         }
@@ -347,7 +344,6 @@
         function openDmModal() { document.getElementById('adminDmModal').style.display = 'flex'; renderDmUserList(); }
         function closeDmModal() { document.getElementById('adminDmModal').style.display = 'none'; }
         
-        // DM 목록: 닉네임과 아이디 동시 표출
         function renderDmUserList() { 
             let chats = JSON.parse(localStorage.getItem('db_chats')); 
             const list = document.getElementById('dmUserList'); list.innerHTML = ''; 
@@ -357,7 +353,6 @@
                     let badgeHtml = unreadCount > 0 ? `<div class="dm-badge" style="display:flex;">${unreadCount}</div>` : ''; 
                     let activeClass = currentChatUser === userId ? 'active' : ''; 
                     let nick = getNickname(userId);
-                    // 닉네임(아이디) 형태
                     list.innerHTML += `<div class="dm-user-item ${activeClass}" onclick="selectDmUser('${userId}')">👤 ${nick}(${userId})${badgeHtml}</div>`; 
                 } 
             }); 
