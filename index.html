@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="site-title">도하 스튜디오 | 웹사이트 만들기</title>
     
-    <!-- 🌟 브라우저 탭 아이콘(파비콘)을 오리(병아리) 이모지로 변경하는 마법의 코드 🌟 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐥</text></svg>">
     
     <meta property="og:title" content="도하 스튜디오 | 웹사이트 만들기">
@@ -54,7 +53,7 @@
         .pricing-card.best { border: 3px solid var(--point-color); transform: scale(1.05); }
         .best-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: var(--point-color); padding: 5px 15px; border-radius: 20px; font-size: 14px; color: #5A4B4D; }
         .price-title { font-size: 24px; margin-bottom: 15px; }
-        .price-amount { font-size: 32px; color: var(--primary-color); margin-bottom: 10px; }
+        .price-amount { font-size: 32px; color: var(--primary-color); margin-bottom: 5px; }
         
         .pricing-notice { max-width: 800px; margin: 40px auto 0; background: white; padding: 20px; border-radius: 20px; text-align: left; box-shadow: var(--box-shadow); color: #8B7377; font-size: 15px; line-height: 1.6; border: 2px dashed #FFE4E1; }
 
@@ -130,6 +129,8 @@
             <div class="pricing-card">
                 <h3 class="price-title">상세페이지 추가</h3>
                 <div class="price-amount">2,000원<span style="font-size: 16px; color: #8B7377;"> / 장당</span></div>
+                <!-- 첫 이용 시 2개 무료 안내 추가 -->
+                <p style="font-size: 14px; color: #ff8b94; font-weight: bold; margin: 0; padding-top: 5px;">(첫 이용 시 상세페이지 2개 무료!)</p>
             </div>
             <div class="pricing-card best">
                 <div class="best-label">가장 인기!</div>
@@ -148,7 +149,8 @@
             <p>📌 <strong>도메인 주소(웹사이트 주소)</strong>는 본인이 직접 결정하고 무료/유료로 구매하셔야 연결이 가능합니다.</p>
             <p>📌 <strong>피드백 및 수정:</strong> 30회 정도로 제한하고 있습니다. (무한정으로 수정되는 것을 방지하기 위한 예방 차원이며, 실제로는 크게 신경 쓰지 않고 피드백하셔도 되니 부담 없이 말씀해주세요! 😊)</p>
             <div style="text-align: center; margin-top: 20px;">
-                <button class="btn-primary" style="padding: 15px 30px; font-size: 18px;" onclick="location.href='/guide-domain'">🌐 깃허브 + 개인 도메인 연결 가이드 보기</button>
+                <!-- 링크 끝에 슬래시(/)를 추가하여 정확한 경로로 이동하도록 수정 -->
+                <button class="btn-primary" style="padding: 15px 30px; font-size: 18px;" onclick="location.href='/guide-domain/'">🌐 깃허브 + 개인 도메인 연결 가이드 보기</button>
             </div>
         </div>
     </section>
@@ -204,7 +206,7 @@
     </div>
 
     <script>
-        if(!localStorage.getItem('db_users')) { localStorage.setItem('db_users', JSON.stringify([{id:'doha', pw:'0706', nickname:'도하', messenger:'', account:''}])); }
+        if(!localStorage.getItem('db_users')) { localStorage.setItem('db_users', JSON.stringify([{id:'doha', pw:'0706', nickname:'도하', messenger:'', account:'', status:'완료'}])); }
         if(!localStorage.getItem('db_reviews')) { localStorage.setItem('db_reviews', JSON.stringify([{author:'테스터', stars:'⭐⭐⭐⭐⭐', text:'테스트'}])); }
         if(!localStorage.getItem('db_chats')) { localStorage.setItem('db_chats', JSON.stringify({})); }
 
@@ -224,8 +226,8 @@
             if(config.mainDesc) document.getElementById('hero-subtitle').innerText = config.mainDesc;
             
             let tpls = JSON.parse(localStorage.getItem('db_templates')) || [
-                { url: '/template', img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400', title: '🍰 카페/디저트 템플릿' },
-                { url: '/template', img: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=400', title: '🎨 개인 포트폴리오' }
+                { url: '/template/', img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400', title: '🍰 카페/디저트 템플릿' },
+                { url: '/template/', img: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=400', title: '🎨 개인 포트폴리오' }
             ];
             
             const tplArea = document.getElementById('template-display-area');
@@ -314,7 +316,8 @@
             let users = JSON.parse(localStorage.getItem('db_users')); 
             if(users.find(u => u.id === id)) return alert("중복 아이디"); 
             
-            users.push({id: id, pw: pw, nickname: nickname, messenger: document.getElementById('reg-messenger').value, account: document.getElementById('reg-account').value}); 
+            // 기본 상태를 '진행중'으로 설정
+            users.push({id: id, pw: pw, nickname: nickname, messenger: document.getElementById('reg-messenger').value, account: document.getElementById('reg-account').value, status: '진행중'}); 
             localStorage.setItem('db_users', JSON.stringify(users)); 
             alert("가입 완료!"); closeModal('signupModal'); openModal('loginModal'); 
         }
@@ -330,7 +333,21 @@
                 container.innerHTML += `<div class="review-card"><div class="review-author">${authorNick}님</div><div class="review-stars">${r.stars}</div><p style="margin:0;">${r.text}</p></div>`; 
             }); 
         }
-        function checkReviewLogin() { if(!currentUser) return alert("로그인 필요"); if(currentUser === 'doha') return alert("관리자 작성 불가"); openModal('reviewModal'); }
+        
+        // 권한 확인: 완료 상태인 유저만 리뷰 작성 가능
+        function checkReviewLogin() { 
+            if(!currentUser) return alert("로그인 후 이용할 수 있습니다."); 
+            if(currentUser === 'doha') return alert("관리자는 리뷰를 쓸 수 없습니다."); 
+
+            let users = JSON.parse(localStorage.getItem('db_users')) || [];
+            let user = users.find(u => u.id === currentUser);
+            if (!user || user.status !== '완료') {
+                return alert("홈페이지 제작이 '완료'된 고객님만 소중한 리뷰를 작성하실 수 있습니다! 😊");
+            }
+
+            openModal('reviewModal'); 
+        }
+        
         function submitReview() { const t = document.getElementById('review-text').value; if(!t) return alert("입력 필요"); let r = JSON.parse(localStorage.getItem('db_reviews')); r.push({author: currentUser, stars: document.getElementById('review-stars').value, text: t}); localStorage.setItem('db_reviews', JSON.stringify(r)); alert("등록 완료"); closeModal('reviewModal'); renderReviews(); }
 
         function toggleUserChat() {
