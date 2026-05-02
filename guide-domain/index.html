@@ -7,21 +7,36 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐥</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <style>
+        /* 모든 요소에 박스 사이징 적용 (모바일 화면 밖으로 삐져나감 방지) */
+        * { box-sizing: border-box; }
+
         :root { --primary-color: #FFB6C1; --secondary-color: #FFF0F5; --text-color: #5A4B4D; }
-        body { font-family: 'Jua', sans-serif; background-color: var(--secondary-color); color: var(--text-color); margin: 0; padding: 0; text-align: center; }
+        body { font-family: 'Jua', sans-serif; background-color: var(--secondary-color); color: var(--text-color); margin: 0; padding: 0; text-align: center; overflow-x: hidden; }
         
-        header { background-color: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); display: flex; justify-content: space-between; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        header { background-color: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); display: flex; justify-content: space-between; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; flex-wrap: wrap; }
         .logo { font-size: 24px; color: var(--primary-color); font-weight: bold; text-decoration: none; }
         .back-btn { background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 16px; transition: 0.2s; }
         .back-btn:hover { transform: scale(1.05); }
 
-        .guide-container { max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 30px; text-align: left; box-shadow: 0 8px 20px rgba(0,0,0,0.1); line-height: 1.8; }
-        h1 { color: var(--primary-color); border-bottom: 3px dashed #FFE4E1; padding-bottom: 15px; margin-top: 0; font-size: 32px; }
+        .guide-container { width: 90%; max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 30px; text-align: left; box-shadow: 0 8px 20px rgba(0,0,0,0.1); line-height: 1.8; }
+        h1 { color: var(--primary-color); border-bottom: 3px dashed #FFE4E1; padding-bottom: 15px; margin-top: 0; font-size: 32px; word-break: keep-all; }
         h2 { color: #8B7377; margin-top: 35px; font-size: 22px; }
         .step-box { background: #FFF9FA; border-left: 5px solid var(--primary-color); padding: 20px; margin-bottom: 20px; border-radius: 10px; font-size: 16px; }
         
-        .code-block { background: #FFE4E1; color: var(--text-color); padding: 4px 10px; border-radius: 5px; font-weight: bold; }
+        /* 긴 URL이 모바일에서 줄바꿈 되도록 word-break 추가 */
+        .code-block { background: #FFE4E1; color: var(--text-color); padding: 4px 10px; border-radius: 5px; font-weight: bold; word-break: break-all; display: inline-block; margin: 2px 0;}
         .highlight { color: #ff4d4d; font-weight: bold; }
+
+        /* 📱 모바일 반응형 최적화 */
+        @media screen and (max-width: 768px) {
+            header { flex-direction: column; gap: 10px; padding: 15px; }
+            .guide-container { width: 95%; margin: 20px auto; padding: 20px; border-radius: 20px; }
+            h1 { font-size: 24px; }
+            p { font-size: 15px !important; }
+            h2 { font-size: 18px; margin-top: 25px; }
+            .step-box { padding: 15px; font-size: 14px; }
+            .code-block { font-size: 13px; }
+        }
     </style>
 </head>
 <body>
