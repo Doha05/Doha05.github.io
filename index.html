@@ -10,7 +10,7 @@
             --primary-color: #FFB6C1; 
             --secondary-color: #FFF0F5; 
             --text-color: #5A4B4D; 
-            --point-color: #FFD700; 
+            --point-color: #87CEEB; /* 채팅창 등 포인트 컬러를 하늘색으로 변경! */
             --box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
         }
         html { scroll-behavior: smooth; }
@@ -35,7 +35,7 @@
         .card { background: white; padding: 30px; border-radius: 30px; width: 250px; box-shadow: var(--box-shadow); transition: transform 0.3s; }
         .card:hover { transform: translateY(-10px); }
 
-        /* 템플릿 둘러보기 섹션 복구 */
+        /* 템플릿 둘러보기 */
         .templates-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .template-card { background: white; border-radius: 20px; overflow: hidden; width: 300px; box-shadow: var(--box-shadow); text-decoration: none; color: inherit; transition: transform 0.3s; cursor: pointer; }
         .template-card:hover { transform: translateY(-10px); border: 2px solid var(--primary-color); }
@@ -43,11 +43,11 @@
         .template-info { padding: 20px; }
         .template-info h3 { margin: 0 0 10px 0; color: var(--text-color); }
 
-        /* 가격표 섹션 복구 */
+        /* 가격표 */
         .pricing-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .pricing-card { background: white; padding: 40px 30px; border-radius: 30px; width: 280px; box-shadow: var(--box-shadow); position: relative; transition: transform 0.3s; }
         .pricing-card.best { border: 3px solid var(--point-color); transform: scale(1.05); }
-        .best-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: var(--point-color); padding: 5px 15px; border-radius: 20px; font-size: 14px; }
+        .best-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: var(--point-color); padding: 5px 15px; border-radius: 20px; font-size: 14px; color: #5A4B4D; }
         .price-title { font-size: 24px; margin-bottom: 15px; }
         .price-amount { font-size: 32px; color: var(--primary-color); margin-bottom: 20px; }
 
@@ -64,14 +64,14 @@
         .modal button.submit-btn { width: 100%; background-color: var(--primary-color); color: white; border: none; padding: 10px; border-radius: 10px; font-family: 'Jua', sans-serif; font-size: 16px; cursor: pointer; margin-top: 10px; }
         .modal-links { margin-top: 15px; font-size: 14px; color: #8B7377; cursor: pointer; }
 
-        /* 스마트스토어형 유저 채팅 둥둥이 위젯 (기본으로 보이게 수정) */
+        /* 스마트스토어형 유저 채팅 둥둥이 위젯 */
         .chat-btn { display: flex; position: fixed; bottom: 30px; right: 30px; background-color: var(--point-color); color: var(--text-color); width: 65px; height: 65px; border-radius: 50%; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 150; transition: transform 0.2s; border: 3px solid white; }
         .chat-btn:hover { transform: scale(1.1); }
         .chat-window { display: none; position: fixed; bottom: 110px; right: 30px; width: 320px; height: 450px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 150; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-color); }
         .chat-header { background: var(--primary-color); color: white; padding: 15px; font-size: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
         .chat-body { flex: 1; padding: 15px; background: #FFF9FA; overflow-y: auto; text-align: left; font-size: 14px; }
         .chat-msg { background: white; padding: 10px; border-radius: 15px; margin-bottom: 10px; display: inline-block; max-width: 80%; border: 1px solid #FFE4E1; word-break: break-all;}
-        .chat-msg.me { background: var(--point-color); align-self: flex-end; float: right; clear: both; border: none; }
+        .chat-msg.me { background: var(--point-color); align-self: flex-end; float: right; clear: both; border: none; color: #5A4B4D; }
         .chat-msg.admin { float: left; clear: both; }
         .chat-input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #FFE4E1; }
         .chat-input-area input { flex: 1; border: none; outline: none; font-family: 'Jua', sans-serif; font-size: 14px;}
@@ -97,7 +97,7 @@
     <header>
         <div class="logo">🐥 도하 스튜디오</div>
         <div class="nav-links" id="nav-menu">
-            <!-- 자바스크립트로 로그인 상태에 따라 템플릿/가격표/고객리뷰/채팅 메뉴가 렌더링됩니다 -->
+            <!-- 자바스크립트로 템플릿/가격표/고객리뷰/채팅 탭이 생성됩니다 -->
         </div>
     </header>
 
@@ -106,26 +106,25 @@
         <p id="hero-subtitle">포트폴리오, 미니 홈페이지, 카페 등!<br>귀엽고 아기자기한 디자인과 합리적인 가격으로 나만의 공간을 만들어보세요.</p>
     </section>
 
-    <!-- 원상복구된 템플릿 둘러보기 섹션 -->
+    <!-- 수정됨: 링크를 /template 로 통일했습니다 -->
     <section id="templates" style="background-color: white;">
         <h2 class="section-title">👀 템플릿 둘러보기</h2>
         <div class="templates-grid">
-            <a href="#" class="template-card">
-                <img class="template-img" id="tpl-img-1" src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400&auto=format&fit=crop" alt="디저트 템플릿">
+            <a href="/template" class="template-card">
+                <img class="template-img" src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400&auto=format&fit=crop" alt="디저트 템플릿">
                 <div class="template-info">
-                    <h3 id="tpl-title-1">🍰 카페/디저트 템플릿</h3>
+                    <h3>🍰 카페/디저트 템플릿</h3>
                 </div>
             </a>
-            <a href="#" class="template-card">
-                <img class="template-img" id="tpl-img-2" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=400&auto=format&fit=crop" alt="포트폴리오 템플릿">
+            <a href="/template" class="template-card">
+                <img class="template-img" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=400&auto=format&fit=crop" alt="포트폴리오 템플릿">
                 <div class="template-info">
-                    <h3 id="tpl-title-2">🎨 개인 포트폴리오</h3>
+                    <h3>🎨 개인 포트폴리오</h3>
                 </div>
             </a>
         </div>
     </section>
 
-    <!-- 원상복구된 3가지 가격표 섹션 -->
     <section id="pricing">
         <h2 class="section-title">💸 가격 안내</h2>
         <div class="pricing-grid">
@@ -148,7 +147,7 @@
     <section id="reviews" style="background-color: white;">
         <h2 class="section-title">💬 고객 리뷰</h2>
         <div class="flex-grid" id="review-container">
-            <!-- 자바스크립트로 리뷰가 렌더링 됩니다. -->
+            <!-- 자바스크립트로 리뷰 렌더링 -->
         </div>
         <button class="btn-primary" style="margin-top: 30px; padding:15px 30px; font-size:18px;" onclick="checkReviewLogin()">✏️ 리뷰 작성하기</button>
     </section>
@@ -177,6 +176,7 @@
             <input type="text" id="reg-id" placeholder="아이디 (5글자 이상)">
             <input type="password" id="reg-pw" placeholder="비밀번호 (6글자 이상)">
             <input type="password" id="reg-pw-confirm" placeholder="비밀번호 확인">
+            <input type="text" id="reg-messenger" placeholder="연락 받을 메신저 ID (카카오톡 등)">
             <input type="text" id="reg-account" placeholder="환불/정산용 계좌번호 (선택)">
             <button class="submit-btn" onclick="doSignup()">가입하기</button>
         </div>
@@ -199,7 +199,7 @@
         </div>
     </div>
 
-    <!-- 🌟 유저용 실시간 채팅 둥둥이 위젯 (우측 하단 항시 표출) -->
+    <!-- 우측 하단 하늘색 채팅 둥둥이 위젯 (항시 노출) -->
     <div class="chat-btn" id="userChatBtn" onclick="toggleUserChat()">💬</div>
     <div class="chat-window" id="userChatWindow">
         <div class="chat-header">
@@ -213,15 +213,13 @@
         </div>
     </div>
 
-    <!-- 관리자용 인스타그램 DM 스타일 모달 -->
+    <!-- 관리자(doha) 전용 DM 모달 -->
     <div class="dm-modal" id="adminDmModal">
         <div class="dm-container">
             <span class="dm-close-btn" onclick="closeDmModal()">&times;</span>
             <div class="dm-sidebar">
                 <div class="dm-sidebar-header">💌 DM 보관함</div>
-                <div class="dm-user-list" id="dmUserList">
-                    <!-- 대화 유저 목록 렌더링 -->
-                </div>
+                <div class="dm-user-list" id="dmUserList"></div>
             </div>
             <div class="dm-chat-area">
                 <div class="dm-chat-header" id="dmChatHeader">대화할 상대를 선택해주세요</div>
@@ -235,9 +233,9 @@
     </div>
 
     <script>
-        // --- 데이터베이스(localStorage) 초기화 ---
+        // --- DB 초기화 ---
         if(!localStorage.getItem('db_users')) {
-            localStorage.setItem('db_users', JSON.stringify([{id:'doha', pw:'0706', account:''}]));
+            localStorage.setItem('db_users', JSON.stringify([{id:'doha', pw:'0706', messenger:'', account:''}]));
         }
         if(!localStorage.getItem('db_reviews')) {
             localStorage.setItem('db_reviews', JSON.stringify([{author:'테스터', stars:'⭐⭐⭐⭐⭐', text:'테스트'}]));
@@ -249,21 +247,19 @@
         let currentUser = localStorage.getItem('currentUser');
         let currentChatUser = null;
 
-        // --- 화면 초기 렌더링 ---
         window.onload = function() {
             renderNav();
             renderReviews();
-            // 관리자(doha)로 접속했을 때는 우측 하단 동그라미를 숨깁니다 (상단 DM관리 버튼 사용)
+            // 관리자 로그인 시 일반 채팅 둥둥이 숨김
             if(currentUser === 'doha') {
                 document.getElementById('userChatBtn').style.display = 'none';
             }
         };
 
-        // --- 네비게이션 렌더링 (채팅 추가) ---
+        // --- 상단 메뉴 (채팅 추가) ---
         function renderNav() {
             const nav = document.getElementById('nav-menu');
             if(!currentUser) {
-                // 비로그인 상태 (상단 탭에 채팅 추가)
                 nav.innerHTML = `
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
@@ -272,7 +268,6 @@
                     <button class="btn-primary" onclick="openModal('loginModal')">로그인</button>
                 `;
             } else if (currentUser === 'doha') {
-                // 관리자 로그인 시 (채팅 대신 DM 관리 버튼)
                 nav.innerHTML = `
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
@@ -282,7 +277,6 @@
                     <button class="btn-primary" onclick="doLogout()">로그아웃</button>
                 `;
             } else {
-                // 일반 유저 로그인 시 (상단 탭에 채팅 추가)
                 nav.innerHTML = `
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
@@ -294,15 +288,15 @@
             }
         }
 
-        // --- 모달 공통 제어 ---
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // --- 회원가입 ---
+        // --- 회원가입 (메신저 아이디 추가) ---
         function doSignup() {
             const id = document.getElementById('reg-id').value.trim();
             const pw = document.getElementById('reg-pw').value;
             const pwConfirm = document.getElementById('reg-pw-confirm').value;
+            const messenger = document.getElementById('reg-messenger').value.trim();
             const account = document.getElementById('reg-account').value;
 
             if(id.length < 5) return alert("아이디는 최소 5글자 이상이어야 합니다.");
@@ -313,7 +307,7 @@
             let isDuplicate = users.find(u => u.id === id);
             if(isDuplicate) return alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
 
-            users.push({id: id, pw: pw, account: account});
+            users.push({id: id, pw: pw, messenger: messenger, account: account});
             localStorage.setItem('db_users', JSON.stringify(users));
 
             alert("회원가입이 완료되었습니다! 로그인해주세요.");
@@ -321,7 +315,7 @@
             openModal('loginModal');
         }
 
-        // --- 로그인 및 로그아웃 ---
+        // --- 로그인 / 로그아웃 ---
         function doLogin() {
             const id = document.getElementById('login-id').value.trim();
             const pw = document.getElementById('login-pw').value;
@@ -375,16 +369,13 @@
             renderReviews();
         }
 
-        // --- 유저용 채팅 창 제어 ---
+        // --- 채팅 ---
         function toggleUserChat() {
-            // 비로그인 상태에서 채팅을 누르면 로그인을 요구합니다.
             if (!currentUser) {
                 alert("원활한 상담을 위해 로그인 후 채팅을 이용해주세요!");
                 openModal('loginModal');
                 return;
             }
-            
-            // 관리자가 탭 메뉴의 채팅을 누른 경우 DM 창을 열어줍니다.
             if (currentUser === 'doha') {
                 openDmModal();
                 return;
@@ -424,7 +415,7 @@
             renderUserChat();
         }
 
-        // --- 관리자(doha) 전용 DM 모달 로직 ---
+        // --- 관리자 DM ---
         function openDmModal() {
             document.getElementById('adminDmModal').style.display = 'flex';
             renderDmUserList();
