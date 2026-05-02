@@ -10,8 +10,9 @@
             --primary-color: #FFB6C1; 
             --secondary-color: #FFF0F5; 
             --text-color: #5A4B4D; 
-            --point-color: #FFD700; /* 가격표용 원래 노란색 복구 */
-            --chat-color: #A8E6CF;  /* 채팅창 전용 파스텔 민트색 신규 추가 */
+            --point-color: #FFD700; 
+            /* 메인 핑크보다 약간 더 진한 핑크로 변경 */
+            --chat-color: #FF9AA2; 
             --box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
         }
         html { scroll-behavior: smooth; }
@@ -21,7 +22,7 @@
         header { background-color: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
         .logo { font-size: 24px; color: var(--primary-color); margin-left: 10px; font-weight: bold; }
         .nav-links { display: flex; align-items: center; gap: 15px; }
-        .nav-links a { text-decoration: none; color: var(--text-color); font-size: 16px; cursor: pointer; transition: color 0.2s; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-size: 16px; cursor: pointer; transition: color 0.2s; position: relative; }
         .nav-links a:hover { color: var(--primary-color); }
         .btn-primary { background-color: var(--primary-color); color: white !important; padding: 8px 15px; border-radius: 15px; border: none; font-family: 'Jua', sans-serif; cursor: pointer; transition: 0.2s; }
         .btn-primary:hover { transform: scale(1.05); }
@@ -67,18 +68,20 @@
         .modal button.submit-btn { width: 100%; background-color: var(--primary-color); color: white; border: none; padding: 10px; border-radius: 10px; font-family: 'Jua', sans-serif; font-size: 16px; cursor: pointer; margin-top: 10px; }
         .modal-links { margin-top: 15px; font-size: 14px; color: #8B7377; cursor: pointer; }
 
-        /* 스마트스토어형 유저 채팅 둥둥이 위젯 (민트색 적용) */
-        .chat-btn { display: flex; position: fixed; bottom: 30px; right: 30px; background-color: var(--chat-color); color: var(--text-color); width: 65px; height: 65px; border-radius: 50%; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 150; transition: transform 0.2s; border: 3px solid white; }
+        /* 채팅 둥둥이 위젯 및 알림 배지 */
+        .chat-btn { display: flex; position: fixed; bottom: 30px; right: 30px; background-color: var(--chat-color); color: white; width: 65px; height: 65px; border-radius: 50%; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 150; transition: transform 0.2s; border: 3px solid white; }
         .chat-btn:hover { transform: scale(1.1); }
+        .chat-badge { display: none; position: absolute; top: -5px; right: -5px; background-color: #ff4d4d; color: white; font-size: 14px; font-weight: bold; width: 24px; height: 24px; border-radius: 50%; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        
         .chat-window { display: none; position: fixed; bottom: 110px; right: 30px; width: 320px; height: 450px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 150; flex-direction: column; overflow: hidden; border: 2px solid var(--chat-color); }
-        .chat-header { background: var(--chat-color); color: var(--text-color); padding: 15px; font-size: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center; font-weight: bold;}
+        .chat-header { background: var(--chat-color); color: white; padding: 15px; font-size: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center; font-weight: bold;}
         .chat-body { flex: 1; padding: 15px; background: #FFF9FA; overflow-y: auto; text-align: left; font-size: 14px; }
         .chat-msg { background: white; padding: 10px; border-radius: 15px; margin-bottom: 10px; display: inline-block; max-width: 80%; border: 1px solid #FFE4E1; word-break: break-all;}
-        .chat-msg.me { background: var(--chat-color); align-self: flex-end; float: right; clear: both; border: none; color: #5A4B4D; }
+        .chat-msg.me { background: var(--chat-color); align-self: flex-end; float: right; clear: both; border: none; color: white; }
         .chat-msg.admin { float: left; clear: both; }
         .chat-input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #FFE4E1; }
         .chat-input-area input { flex: 1; border: none; outline: none; font-family: 'Jua', sans-serif; font-size: 14px;}
-        .chat-input-area button { background: var(--chat-color); color: var(--text-color); border: none; border-radius: 10px; padding: 5px 15px; cursor: pointer; font-family: 'Jua', sans-serif; font-weight: bold;}
+        .chat-input-area button { background: var(--chat-color); color: white; border: none; border-radius: 10px; padding: 5px 15px; cursor: pointer; font-family: 'Jua', sans-serif; font-weight: bold;}
 
         /* 인스타그램 DM형 관리자 채팅 모달 */
         .dm-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 300; justify-content: center; align-items: center; }
@@ -86,8 +89,9 @@
         .dm-sidebar { width: 250px; background: #FFF0F5; border-right: 1px solid #FFE4E1; display: flex; flex-direction: column; }
         .dm-sidebar-header { padding: 20px; font-size: 20px; font-weight: bold; border-bottom: 1px solid #FFE4E1; color: var(--primary-color); }
         .dm-user-list { flex: 1; overflow-y: auto; }
-        .dm-user-item { padding: 15px 20px; border-bottom: 1px solid #FFE4E1; cursor: pointer; font-size: 16px; text-align: left; transition: background 0.2s;}
+        .dm-user-item { padding: 15px 20px; border-bottom: 1px solid #FFE4E1; cursor: pointer; font-size: 16px; text-align: left; transition: background 0.2s; position: relative;}
         .dm-user-item:hover, .dm-user-item.active { background: #FFE4E1; }
+        .dm-badge { display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: #ff4d4d; color: white; font-size: 12px; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; justify-content: center; align-items: center; }
         .dm-chat-area { flex: 1; display: flex; flex-direction: column; background: white; }
         .dm-chat-header { padding: 20px; border-bottom: 1px solid #FFE4E1; font-size: 18px; font-weight: bold; text-align: left;}
         .dm-close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #8B7377; }
@@ -201,8 +205,12 @@
         </div>
     </div>
 
-    <!-- 우측 하단 채팅 둥둥이 위젯 -->
-    <div class="chat-btn" id="userChatBtn" onclick="toggleUserChat()">💬</div>
+    <!-- 우측 하단 채팅 둥둥이 위젯 (알림 배지 추가) -->
+    <div class="chat-btn" id="userChatBtn" onclick="toggleUserChat()">
+        💬
+        <div class="chat-badge" id="chatBadge">0</div>
+    </div>
+    
     <div class="chat-window" id="userChatWindow">
         <div class="chat-header">
             <span>🐥 도하 스튜디오 문의</span>
@@ -252,12 +260,74 @@
         window.onload = function() {
             renderNav();
             renderReviews();
+            updateBadges(); // 초기 접속 시 알림 배지 확인
+            
             if(currentUser === 'doha') {
                 document.getElementById('userChatBtn').style.display = 'none';
             }
         };
 
-        // --- 상단 메뉴 (회원탈퇴 버튼 추가) ---
+        // --- 탭 간 실시간 동기화 (핵심 로직) ---
+        window.addEventListener('storage', function(e) {
+            if(e.key === 'db_chats') {
+                updateBadges(); // 알림 배지 숫자 업데이트
+                
+                // 만약 유저가 채팅창을 열어두고 있다면 바로 업데이트
+                const userChatWindow = document.getElementById('userChatWindow');
+                if (userChatWindow.style.display === 'flex') {
+                    renderUserChat();
+                }
+                
+                // 만약 관리자가 특정 유저의 DM창을 열어두고 있다면 바로 업데이트
+                const adminDmModal = document.getElementById('adminDmModal');
+                if (adminDmModal.style.display === 'flex') {
+                    renderDmUserList(); // 사이드바 업데이트
+                    if(currentChatUser) {
+                        renderAdminChat(); // 활성화된 채팅창 업데이트
+                    }
+                }
+            }
+        });
+
+        // --- 알림 배지 카운트 업데이트 ---
+        function updateBadges() {
+            let chats = JSON.parse(localStorage.getItem('db_chats'));
+            
+            // 일반 유저 배지
+            if (currentUser && currentUser !== 'doha') {
+                let myChats = chats[currentUser] || [];
+                // 보낸 사람이 관리자('doha')이고 아직 읽지 않은 메시지 카운트
+                let unreadCount = myChats.filter(m => m.sender === 'doha' && !m.isRead).length;
+                
+                const badge = document.getElementById('chatBadge');
+                if (unreadCount > 0) {
+                    badge.style.display = 'flex';
+                    badge.innerText = unreadCount;
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+            
+            // 관리자 메뉴 상단 배지
+            if (currentUser === 'doha') {
+                let totalUnread = 0;
+                Object.keys(chats).forEach(userId => {
+                    totalUnread += chats[userId].filter(m => m.sender !== 'doha' && !m.isRead).length;
+                });
+                
+                const adminBadge = document.getElementById('adminNavBadge');
+                if (adminBadge) {
+                    if (totalUnread > 0) {
+                        adminBadge.style.display = 'inline-flex';
+                        adminBadge.innerText = totalUnread;
+                    } else {
+                        adminBadge.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        // --- 상단 메뉴 (관리자 배지 포함) ---
         function renderNav() {
             const nav = document.getElementById('nav-menu');
             if(!currentUser) {
@@ -273,12 +343,14 @@
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
                     <a href="#reviews">고객리뷰</a>
-                    <a onclick="openDmModal()" style="color:var(--chat-color); font-weight:bold;">💌 DM관리</a>
-                    <span style="color:var(--primary-color); font-weight:bold; margin-left:10px;">👑 도하님</span>
+                    <a onclick="openDmModal()" style="color:var(--chat-color); font-weight:bold; cursor:pointer; position:relative;">
+                        💌 DM관리
+                        <span id="adminNavBadge" style="display:none; position:absolute; top:-10px; right:-15px; background:red; color:white; border-radius:50%; width:18px; height:18px; font-size:11px; align-items:center; justify-content:center;">0</span>
+                    </a>
+                    <span style="color:var(--primary-color); font-weight:bold; margin-left:15px;">👑 도하님</span>
                     <button class="btn-primary" onclick="doLogout()">로그아웃</button>
                 `;
             } else {
-                // 일반 유저인 경우 '회원탈퇴' 버튼을 보여줍니다.
                 nav.innerHTML = `
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
@@ -297,26 +369,17 @@
         // --- 회원탈퇴 로직 ---
         function doWithdraw() {
             if(!confirm("정말로 탈퇴하시겠습니까? 계정 정보와 채팅 기록이 모두 삭제됩니다.")) return;
-            
-            // 1. 유저 정보 삭제
             let users = JSON.parse(localStorage.getItem('db_users'));
             users = users.filter(u => u.id !== currentUser);
             localStorage.setItem('db_users', JSON.stringify(users));
-
-            // 2. 채팅 기록 삭제
             let chats = JSON.parse(localStorage.getItem('db_chats'));
-            if(chats[currentUser]) {
-                delete chats[currentUser];
-                localStorage.setItem('db_chats', JSON.stringify(chats));
-            }
-
-            // 3. 로그아웃 처리
+            if(chats[currentUser]) { delete chats[currentUser]; localStorage.setItem('db_chats', JSON.stringify(chats)); }
             alert("회원 탈퇴 처리가 완료되었습니다. 그동안 이용해 주셔서 감사합니다!");
             localStorage.removeItem('currentUser');
             location.reload();
         }
 
-        // --- 회원가입 ---
+        // --- 회원가입 / 로그인 / 로그아웃 / 리뷰 ---
         function doSignup() {
             const id = document.getElementById('reg-id').value.trim();
             const pw = document.getElementById('reg-pw').value;
@@ -329,66 +392,46 @@
             if(pw !== pwConfirm) return alert("비밀번호가 일치하지 않습니다.");
 
             let users = JSON.parse(localStorage.getItem('db_users'));
-            let isDuplicate = users.find(u => u.id === id);
-            if(isDuplicate) return alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
+            if(users.find(u => u.id === id)) return alert("이미 존재하는 아이디입니다.");
 
             users.push({id: id, pw: pw, messenger: messenger, account: account});
             localStorage.setItem('db_users', JSON.stringify(users));
-
             alert("회원가입이 완료되었습니다! 로그인해주세요.");
             closeModal('signupModal');
             openModal('loginModal');
         }
 
-        // --- 로그인 / 로그아웃 ---
         function doLogin() {
             const id = document.getElementById('login-id').value.trim();
             const pw = document.getElementById('login-pw').value;
             let users = JSON.parse(localStorage.getItem('db_users'));
-            
             let user = users.find(u => u.id === id && u.pw === pw);
-            if(user) {
-                localStorage.setItem('currentUser', user.id);
-                alert("로그인 성공!");
-                location.reload();
-            } else {
-                alert("아이디 또는 비밀번호가 틀렸습니다.");
-            }
-        }
-        function doLogout() {
-            localStorage.removeItem('currentUser');
-            location.reload();
+            if(user) { localStorage.setItem('currentUser', user.id); alert("로그인 성공!"); location.reload(); }
+            else { alert("아이디 또는 비밀번호가 틀렸습니다."); }
         }
 
-        // --- 리뷰 ---
+        function doLogout() { localStorage.removeItem('currentUser'); location.reload(); }
+
         function renderReviews() {
             const container = document.getElementById('review-container');
             let reviews = JSON.parse(localStorage.getItem('db_reviews'));
             container.innerHTML = '';
-            reviews.forEach(r => {
-                container.innerHTML += `
-                    <div class="review-card">
-                        <div class="review-author">${r.author}님</div>
-                        <div class="review-stars">${r.stars}</div>
-                        <p style="margin:0;">${r.text}</p>
-                    </div>
-                `;
-            });
+            reviews.forEach(r => { container.innerHTML += `<div class="review-card"><div class="review-author">${r.author}님</div><div class="review-stars">${r.stars}</div><p style="margin:0;">${r.text}</p></div>`; });
         }
+
         function checkReviewLogin() {
             if(!currentUser) return alert("로그인 후 이용할 수 있습니다.");
             if(currentUser === 'doha') return alert("관리자는 리뷰를 쓸 수 없습니다.");
             openModal('reviewModal');
         }
+
         function submitReview() {
             const stars = document.getElementById('review-stars').value;
             const text = document.getElementById('review-text').value;
             if(!text) return alert("리뷰 내용을 입력해주세요.");
-
             let reviews = JSON.parse(localStorage.getItem('db_reviews'));
             reviews.push({author: currentUser, stars: stars, text: text});
             localStorage.setItem('db_reviews', JSON.stringify(reviews));
-
             alert("리뷰가 등록되었습니다!");
             closeModal('reviewModal');
             renderReviews();
@@ -411,6 +454,13 @@
                 chat.style.display = 'none';
             } else {
                 chat.style.display = 'flex';
+                // 채팅창 열 때 모든 관리자 메시지 읽음 처리
+                let chats = JSON.parse(localStorage.getItem('db_chats'));
+                if(chats[currentUser]) {
+                    chats[currentUser].forEach(m => { if(m.sender === 'doha') m.isRead = true; });
+                    localStorage.setItem('db_chats', JSON.stringify(chats));
+                }
+                updateBadges();
                 renderUserChat();
             }
         }
@@ -426,6 +476,7 @@
             });
             body.scrollTop = body.scrollHeight;
         }
+
         function sendUserMessage() {
             const input = document.getElementById('userChatInput');
             const text = input.value.trim();
@@ -433,7 +484,8 @@
 
             let chats = JSON.parse(localStorage.getItem('db_chats'));
             if(!chats[currentUser]) chats[currentUser] = [];
-            chats[currentUser].push({sender: currentUser, text: text});
+            // 메시지에 isRead: false 속성 추가
+            chats[currentUser].push({sender: currentUser, text: text, isRead: false});
             localStorage.setItem('db_chats', JSON.stringify(chats));
 
             input.value = '';
@@ -455,7 +507,10 @@
             
             Object.keys(chats).forEach(userId => {
                 if(chats[userId].length > 0) {
-                    list.innerHTML += `<div class="dm-user-item" onclick="selectDmUser('${userId}')">👤 ${userId}</div>`;
+                    let unreadCount = chats[userId].filter(m => m.sender !== 'doha' && !m.isRead).length;
+                    let badgeHtml = unreadCount > 0 ? `<div class="dm-badge" style="display:flex;">${unreadCount}</div>` : '';
+                    let activeClass = currentChatUser === userId ? 'active' : '';
+                    list.innerHTML += `<div class="dm-user-item ${activeClass}" onclick="selectDmUser('${userId}')">👤 ${userId}${badgeHtml}</div>`;
                 }
             });
             if(list.innerHTML === '') list.innerHTML = '<div style="padding:20px; color:gray;">메시지가 없습니다.</div>';
@@ -465,6 +520,15 @@
             document.getElementById('dmChatHeader').innerText = `👤 ${userId} 님과의 대화`;
             document.getElementById('adminChatInput').disabled = false;
             document.getElementById('adminChatSendBtn').disabled = false;
+            
+            // 관리자가 특정 유저 채팅방을 클릭하면 해당 유저의 메시지를 모두 읽음 처리
+            let chats = JSON.parse(localStorage.getItem('db_chats'));
+            if(chats[userId]) {
+                chats[userId].forEach(m => { if(m.sender !== 'doha') m.isRead = true; });
+                localStorage.setItem('db_chats', JSON.stringify(chats));
+            }
+            updateBadges();
+            renderDmUserList();
             renderAdminChat();
         }
         function renderAdminChat() {
@@ -486,7 +550,8 @@
             if(!text) return;
 
             let chats = JSON.parse(localStorage.getItem('db_chats'));
-            chats[currentChatUser].push({sender: 'doha', text: text});
+            // 메시지에 isRead: false 속성 추가
+            chats[currentChatUser].push({sender: 'doha', text: text, isRead: false});
             localStorage.setItem('db_chats', JSON.stringify(chats));
 
             input.value = '';
