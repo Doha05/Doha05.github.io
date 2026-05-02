@@ -10,7 +10,8 @@
             --primary-color: #FFB6C1; 
             --secondary-color: #FFF0F5; 
             --text-color: #5A4B4D; 
-            --point-color: #87CEEB; /* 채팅창 등 포인트 컬러를 하늘색으로 변경! */
+            --point-color: #FFD700; /* 가격표용 원래 노란색 복구 */
+            --chat-color: #A8E6CF;  /* 채팅창 전용 파스텔 민트색 신규 추가 */
             --box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
         }
         html { scroll-behavior: smooth; }
@@ -24,6 +25,8 @@
         .nav-links a:hover { color: var(--primary-color); }
         .btn-primary { background-color: var(--primary-color); color: white !important; padding: 8px 15px; border-radius: 15px; border: none; font-family: 'Jua', sans-serif; cursor: pointer; transition: 0.2s; }
         .btn-primary:hover { transform: scale(1.05); }
+        .btn-danger { background-color: #ff8b94; color: white !important; padding: 8px 15px; border-radius: 15px; border: none; font-family: 'Jua', sans-serif; cursor: pointer; transition: 0.2s; }
+        .btn-danger:hover { transform: scale(1.05); background-color: #ff4d4d; }
 
         /* 공통 섹션 */
         section { padding: 60px 20px; }
@@ -64,18 +67,18 @@
         .modal button.submit-btn { width: 100%; background-color: var(--primary-color); color: white; border: none; padding: 10px; border-radius: 10px; font-family: 'Jua', sans-serif; font-size: 16px; cursor: pointer; margin-top: 10px; }
         .modal-links { margin-top: 15px; font-size: 14px; color: #8B7377; cursor: pointer; }
 
-        /* 스마트스토어형 유저 채팅 둥둥이 위젯 */
-        .chat-btn { display: flex; position: fixed; bottom: 30px; right: 30px; background-color: var(--point-color); color: var(--text-color); width: 65px; height: 65px; border-radius: 50%; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 150; transition: transform 0.2s; border: 3px solid white; }
+        /* 스마트스토어형 유저 채팅 둥둥이 위젯 (민트색 적용) */
+        .chat-btn { display: flex; position: fixed; bottom: 30px; right: 30px; background-color: var(--chat-color); color: var(--text-color); width: 65px; height: 65px; border-radius: 50%; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 150; transition: transform 0.2s; border: 3px solid white; }
         .chat-btn:hover { transform: scale(1.1); }
-        .chat-window { display: none; position: fixed; bottom: 110px; right: 30px; width: 320px; height: 450px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 150; flex-direction: column; overflow: hidden; border: 2px solid var(--primary-color); }
-        .chat-header { background: var(--primary-color); color: white; padding: 15px; font-size: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+        .chat-window { display: none; position: fixed; bottom: 110px; right: 30px; width: 320px; height: 450px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 150; flex-direction: column; overflow: hidden; border: 2px solid var(--chat-color); }
+        .chat-header { background: var(--chat-color); color: var(--text-color); padding: 15px; font-size: 18px; text-align: left; display: flex; justify-content: space-between; align-items: center; font-weight: bold;}
         .chat-body { flex: 1; padding: 15px; background: #FFF9FA; overflow-y: auto; text-align: left; font-size: 14px; }
         .chat-msg { background: white; padding: 10px; border-radius: 15px; margin-bottom: 10px; display: inline-block; max-width: 80%; border: 1px solid #FFE4E1; word-break: break-all;}
-        .chat-msg.me { background: var(--point-color); align-self: flex-end; float: right; clear: both; border: none; color: #5A4B4D; }
+        .chat-msg.me { background: var(--chat-color); align-self: flex-end; float: right; clear: both; border: none; color: #5A4B4D; }
         .chat-msg.admin { float: left; clear: both; }
         .chat-input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #FFE4E1; }
         .chat-input-area input { flex: 1; border: none; outline: none; font-family: 'Jua', sans-serif; font-size: 14px;}
-        .chat-input-area button { background: var(--primary-color); color: white; border: none; border-radius: 10px; padding: 5px 15px; cursor: pointer; font-family: 'Jua', sans-serif; }
+        .chat-input-area button { background: var(--chat-color); color: var(--text-color); border: none; border-radius: 10px; padding: 5px 15px; cursor: pointer; font-family: 'Jua', sans-serif; font-weight: bold;}
 
         /* 인스타그램 DM형 관리자 채팅 모달 */
         .dm-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 300; justify-content: center; align-items: center; }
@@ -97,7 +100,7 @@
     <header>
         <div class="logo">🐥 도하 스튜디오</div>
         <div class="nav-links" id="nav-menu">
-            <!-- 자바스크립트로 템플릿/가격표/고객리뷰/채팅 탭이 생성됩니다 -->
+            <!-- 자바스크립트로 메뉴 렌더링 -->
         </div>
     </header>
 
@@ -106,7 +109,6 @@
         <p id="hero-subtitle">포트폴리오, 미니 홈페이지, 카페 등!<br>귀엽고 아기자기한 디자인과 합리적인 가격으로 나만의 공간을 만들어보세요.</p>
     </section>
 
-    <!-- 수정됨: 링크를 /template 로 통일했습니다 -->
     <section id="templates" style="background-color: white;">
         <h2 class="section-title">👀 템플릿 둘러보기</h2>
         <div class="templates-grid">
@@ -199,7 +201,7 @@
         </div>
     </div>
 
-    <!-- 우측 하단 하늘색 채팅 둥둥이 위젯 (항시 노출) -->
+    <!-- 우측 하단 채팅 둥둥이 위젯 -->
     <div class="chat-btn" id="userChatBtn" onclick="toggleUserChat()">💬</div>
     <div class="chat-window" id="userChatWindow">
         <div class="chat-header">
@@ -250,13 +252,12 @@
         window.onload = function() {
             renderNav();
             renderReviews();
-            // 관리자 로그인 시 일반 채팅 둥둥이 숨김
             if(currentUser === 'doha') {
                 document.getElementById('userChatBtn').style.display = 'none';
             }
         };
 
-        // --- 상단 메뉴 (채팅 추가) ---
+        // --- 상단 메뉴 (회원탈퇴 버튼 추가) ---
         function renderNav() {
             const nav = document.getElementById('nav-menu');
             if(!currentUser) {
@@ -272,11 +273,12 @@
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
                     <a href="#reviews">고객리뷰</a>
-                    <a onclick="openDmModal()" style="color:var(--point-color); font-weight:bold;">💌 DM관리</a>
+                    <a onclick="openDmModal()" style="color:var(--chat-color); font-weight:bold;">💌 DM관리</a>
                     <span style="color:var(--primary-color); font-weight:bold; margin-left:10px;">👑 도하님</span>
                     <button class="btn-primary" onclick="doLogout()">로그아웃</button>
                 `;
             } else {
+                // 일반 유저인 경우 '회원탈퇴' 버튼을 보여줍니다.
                 nav.innerHTML = `
                     <a href="#templates">템플릿</a>
                     <a href="#pricing">가격표</a>
@@ -284,6 +286,7 @@
                     <a onclick="toggleUserChat()">채팅</a>
                     <span style="font-weight:bold; margin-left:10px;">${currentUser}님</span>
                     <button class="btn-primary" onclick="doLogout()">로그아웃</button>
+                    <button class="btn-danger" onclick="doWithdraw()">회원탈퇴</button>
                 `;
             }
         }
@@ -291,7 +294,29 @@
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // --- 회원가입 (메신저 아이디 추가) ---
+        // --- 회원탈퇴 로직 ---
+        function doWithdraw() {
+            if(!confirm("정말로 탈퇴하시겠습니까? 계정 정보와 채팅 기록이 모두 삭제됩니다.")) return;
+            
+            // 1. 유저 정보 삭제
+            let users = JSON.parse(localStorage.getItem('db_users'));
+            users = users.filter(u => u.id !== currentUser);
+            localStorage.setItem('db_users', JSON.stringify(users));
+
+            // 2. 채팅 기록 삭제
+            let chats = JSON.parse(localStorage.getItem('db_chats'));
+            if(chats[currentUser]) {
+                delete chats[currentUser];
+                localStorage.setItem('db_chats', JSON.stringify(chats));
+            }
+
+            // 3. 로그아웃 처리
+            alert("회원 탈퇴 처리가 완료되었습니다. 그동안 이용해 주셔서 감사합니다!");
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+
+        // --- 회원가입 ---
         function doSignup() {
             const id = document.getElementById('reg-id').value.trim();
             const pw = document.getElementById('reg-pw').value;
